@@ -4,7 +4,7 @@ import com.mshd.service.DecodeDataService;
 import com.mshd.utils.R;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.mshd.utils.jwt.JwtToken;
 @RestController
 @RequestMapping("/v1")
 @CrossOrigin
@@ -15,11 +15,18 @@ public class DecodedDataController {
         this.decodeDataService = decodeDataService;
     }
 
+    @JwtToken
     @PostMapping("/decode/text")
     public R decodeAndSaveText(@RequestParam("code") String code,
                                @RequestParam("description") String description) {
         String decodedData = decodeDataService.decodeAndSave(code, description, null, null);
         return R.ok("Decoded data with text: " + decodedData);
+    }
+
+    @JwtTokende
+    @GetMapping("/decode/data")
+    public R decodeAndSaveData(){
+        return R.ok(decodeDataService.getDecodeddata());
     }
 
     // 接收编码和媒体文件（图片、音频、视频）的接口

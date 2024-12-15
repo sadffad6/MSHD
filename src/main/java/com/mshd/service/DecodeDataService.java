@@ -1,8 +1,11 @@
 package com.mshd.service;
 
 import com.mshd.mapper.*;
+import com.mshd.pojo.DecodedData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DecodeDataService {
@@ -73,5 +76,8 @@ public class DecodeDataService {
         String second = code.substring(12, 14);
 
         return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+    }
+    public List<DecodedData> getDecodeddata() {
+        return decodedCodeMapper.getDecodedData();
     }
 }

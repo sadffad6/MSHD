@@ -1,9 +1,12 @@
 package com.mshd.mapper;
 
+import com.mshd.pojo.DecodedData;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Mapper
 public interface DecodedDataMapper {
@@ -26,4 +29,7 @@ public interface DecodedDataMapper {
     void insertMediaDescription(@Param("code") String code,
                                 @Param("mediaUrl") String mediaUrl,
                                 @Param("mediaType") String mediaType);
+    @Select("SELECT * FROM decoded_data")
+    List<DecodedData> getDecodedData();
+
 }
