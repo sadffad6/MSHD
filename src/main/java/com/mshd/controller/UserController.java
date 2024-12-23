@@ -7,7 +7,7 @@ import com.mshd.utils.jwt.JwtToken;
 import com.mshd.utils.R;
 
 @RestController
-@RequestMapping("/User")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired

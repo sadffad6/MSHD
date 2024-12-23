@@ -18,10 +18,11 @@ public class UserService {
         String storedPassword = userMapper.getPassword(username);
         return storedPassword != null && storedPassword.equals(password);
     }
+
     public User getUserById(String username) {
        return userMapper.findByUsername(username);
-
     }
+
     public boolean addUser(String username, String password) {
         if(userMapper.insert(username, password)){
             return true;

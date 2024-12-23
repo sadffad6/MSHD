@@ -80,4 +80,78 @@ public class DecodeDataService {
     public List<DecodedData> getDecodeddata() {
         return decodedCodeMapper.getDecodedData();
     }
+    public List<DecodedData> getDecodedDataByMediaType(String media_type) {
+        try {
+            return decodedCodeMapper.selectDecodedDataByMediaType(media_type);
+        } catch (Exception e) {
+            // 这里可以记录日志，方便后续排查问题，比如使用日志框架记录异常信息
+            e.printStackTrace();
+            // 根据业务需求返回合适的默认值，比如返回空列表
+            return List.of();
+        }
+    }
+
+    public boolean deleteDecodedCode(String id) {
+        return decodedCodeMapper.deleteDecodedData(id);
+    }
+
+    // 根据date查询数据
+    public List<DecodedData> getDecodedDataByDate(String date) {
+        try {
+            return decodedCodeMapper.selectDecodedDataByDate(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
+    // 根据source查询数据
+    public List<DecodedData> getDecodedDataBySource(String source) {
+        try {
+            return decodedCodeMapper.selectDecodedDataBySource(source);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
+    // 根据carrier查询数据
+    public List<DecodedData> getDecodedDataByCarrier(String carrier) {
+        try {
+            return decodedCodeMapper.selectDecodedDataByCarrier(carrier);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
+    // 根据category查询数据
+    public List<DecodedData> getDecodedDataByCategory(String category) {
+        try {
+            return decodedCodeMapper.selectDecodedDataByCategory(category);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
+    // 根据subcategory查询数据
+    public List<DecodedData> getDecodedDataBySubcategory(String subcategory) {
+        try {
+            return decodedCodeMapper.selectDecodedDataBySubcategory(subcategory);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
+    // 根据indicator查询数据
+    public List<DecodedData> getDecodedDataByIndicator(String indicator) {
+        try {
+            return decodedCodeMapper.selectDecodedDataByIndicator(indicator);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
 }
