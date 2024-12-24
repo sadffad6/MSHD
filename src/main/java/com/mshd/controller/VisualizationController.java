@@ -14,14 +14,9 @@ public class VisualizationController {
     @Autowired
     private VisualizationService visualizationService;
 
-
-
-
     @GetMapping("/counts")
     public R disastersum() {
         Map<String, Integer> map = new HashMap<>();
-
-
         return  R.ok("sucess",visualizationService.countDisaster());
     }
 }

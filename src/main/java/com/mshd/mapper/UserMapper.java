@@ -2,10 +2,7 @@ package com.mshd.mapper;
 
 
 import com.mshd.pojo.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
@@ -18,4 +15,7 @@ public interface UserMapper {
 
     @Select("SELECT password FROM User WHERE username=#{username} LIMIT 1")
     String getPassword(@Param("username") String username);
+
+    @Delete("DELETE FROM user WHERE id = #{uid}")
+    boolean delete(@Param("uid") String uid);
 }
