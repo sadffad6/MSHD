@@ -2,6 +2,7 @@ package com.mshd.controller;
 
 import com.mshd.pojo.DecodedData;
 import com.mshd.service.DecodeDataService;
+import com.mshd.pojo.IdsRequest;
 import com.mshd.utils.R;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,15 +69,21 @@ public class DecodedDataController {
         return "unknown";
     }
 
+
+
     @JwtToken
-    @PostMapping("/decode/delete")
-    private R deleteDecodedData(@RequestParam("id") String id) {
-        boolean yn=decodeDataService.deleteDecodedCode(id);
-        if (yn) {
-            return R.ok(yn);
-        }else {
-            return R.failure("失败");
-        }}
+    @DeleteMapping("/data/delete")
+    private R deleteDecodedData(@RequestBody IdsRequest idsRequest) {
+        List<String> ids = idsRequest.getIds();
+        for(String id : ids){
+            boolean yn = decodeDataService.deleteDecodedCode(id);
+            if(!yn){
+                return R.failure("删除 " + id + " 失败");
+            }
+        }
+        return R.ok("删除数据成功");
+    }
+
     @PostMapping("/query")
     public R queryData(
             @RequestParam(name = "media_type", required = false) String media_type,
@@ -153,3 +160,5 @@ public class DecodedDataController {
         }
     }
 }
+
+
