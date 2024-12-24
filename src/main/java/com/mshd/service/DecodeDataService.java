@@ -30,8 +30,6 @@ public class DecodeDataService {
 
     public String decodeAndSave(String code, String description, String mediaUrl, String mediaType) {
         String message = "";
-        String Code = code;
-        Code = Code.substring(0,Code.length()-1);
 
         String location = decodeLocation(code.substring(0, 12));
         String date = decodeDate(code.substring(12,26));
@@ -42,13 +40,13 @@ public class DecodeDataService {
         String subcategory=disaster.split("-")[1];
         String indicator=disaster.split("-")[2];
 
-        decodedCodeMapper.insertDecodedCode(Code,location, date, source, carrier,category,subcategory,indicator);
+        decodedCodeMapper.insertDecodedCode(code,location, date, source, carrier,category,subcategory,indicator);
 
         if (description != null && !description.isEmpty()) {
-            decodedCodeMapper.insertDescriptionText(Code, description);
+            decodedCodeMapper.insertDescriptionText(code, description);
             message = location + date + source + carrier + disaster + ": " + description;
         } else if (mediaUrl != null && !mediaUrl.isEmpty() && mediaType != null && !mediaType.isEmpty()) {
-            decodedCodeMapper.insertMediaDescription(Code, mediaUrl, mediaType);
+            decodedCodeMapper.insertMediaDescription(code, mediaUrl, mediaType);
             message = location + date + source +carrier + disaster + ": " + mediaType;
         }
 
