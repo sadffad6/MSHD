@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -36,8 +37,11 @@ public class VisualizationService {
         int todayDisasterCount = decodedCodeMapper.countTodayDisaster();
         int weekDisasterCount = decodedCodeMapper.countWeekDisaster();
         int monthDisasterCount = decodedCodeMapper.countMonthDisaster();
-        Map<String, Integer> disasterMap = new HashMap<>();
-        disasterMap=decodedCodeMapper.groupByCategory();
+        List<Map<String, Integer>> disasterMap=decodedCodeMapper.groupByCategory();
+
+        List<Map<String, Integer>> locationDisasterMap=decodedCodeMapper.groupByLocation();
+
+
 
 
         // 设置disaster_counts的值
@@ -51,7 +55,9 @@ public class VisualizationService {
 
         // 将new_data内层Map放入外层resultMap中
         resultMap.put("new_data", newDataMap);
-        resultMap.put("distribution",disasterMap);
+        resultMap.put("type_distribution",disasterMap);
+        resultMap.put("location_distribution",locationDisasterMap);
+
 
         return resultMap;
     }

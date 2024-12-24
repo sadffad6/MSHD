@@ -23,7 +23,11 @@ public interface DecodedDataMapper {
 
 
     @Select("SELECT category,count(*) as count FROM decoded_data GROUP BY (category)")
-    Map<String, Integer>  groupByCategory();
+    List<Map<String, Integer>>  groupByCategory();
+
+
+    @Select("SELECT location,count(*) as count FROM decoded_data GROUP BY location ")
+    List<Map<String, Integer>>  groupByLocation();
 
 
 

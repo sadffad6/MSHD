@@ -16,7 +16,7 @@ public class VisualizationController {
 
 
 
-    @JwtToken
+
     @GetMapping("/counts")
     public R disastersum() {
         Map<String, Integer> map = new HashMap<>();
