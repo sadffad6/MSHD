@@ -10,6 +10,7 @@ import com.mshd.utils.jwt.JwtToken;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/v1")
@@ -40,12 +41,16 @@ public class DecodedDataController {
     @PostMapping("/decode/media")
     public R decodeAndSaveMedia(@RequestParam("code") String code,
                                 @RequestParam("file") MultipartFile file) {
+        try{
+            String mediaUrl = uploadMediaFile(file);
+            String mediaType = determineMediaType(file);
 
-        String mediaUrl = uploadMediaFile(file);
-        String mediaType = determineMediaType(file);
+            String decodedData = decodeDataService.decodeAndSave(code, null, mediaUrl, mediaType);
+            return R.ok("Decoded data with media: " + decodedData);
+        } catch (Exception e) {
+            return R.failure(e.getMessage());
+        }
 
-        String decodedData = decodeDataService.decodeAndSave(code, null, mediaUrl, mediaType);
-        return R.ok("Decoded data with media: " + decodedData);
     }
 
     // 上传文件（此处简化为直接返回 URL)
@@ -69,7 +74,13 @@ public class DecodedDataController {
         return "unknown";
     }
 
-
+    @GetMapping("data_list")
+    public R getAllData() {
+        List<Map<String, Object>> dataList = decodeDataService.getAllDecodedData();
+        int total = dataList.size();
+        Map<String, Object> data_map = Map.of("count",total,"all_data",dataList);
+        return R.ok(data_map);
+    }
 
     @JwtToken
     @DeleteMapping("/data/delete")

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DecodeDataService {
@@ -77,9 +78,15 @@ public class DecodeDataService {
 
         return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
     }
+
     public List<DecodedData> getDecodeddata() {
         return decodedCodeMapper.getDecodedData();
     }
+
+    public List<Map<String, Object>> getAllDecodedData() {
+        return decodedCodeMapper.getAllDecodedData();
+    }
+
     public List<DecodedData> getDecodedDataByMediaType(String media_type) {
         try {
             return decodedCodeMapper.selectDecodedDataByMediaType(media_type);

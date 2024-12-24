@@ -40,16 +40,21 @@ public interface DecodedDataMapper {
                            @Param("category") String category,
                            @Param("subcategory") String subcategory,
                            @Param("indicator") String indicator);
+
+    @Select("SELECT id, location, date, source, carrier, category, subcategory, indicator FROM decoded_data")
+    List<Map<String, Object>> getAllDecodedData();
+
     // 插入文本描述
     @Insert("UPDATE decoded_data SET description_text = #{descriptionText} WHERE code = #{code}")
     void insertDescriptionText(@Param("code") String code,
                                @Param("descriptionText") String descriptionText);
 
     // 插入媒体文件描述
-    @Insert("UPDATE decoded_data SET media_url = #{mediaUrl}, meida_type = #{mediaType} WHERE code = #{code}")
+    @Insert("UPDATE decoded_data SET media_url = #{mediaUrl}, media_type = #{mediaType} WHERE code = #{code}")
     void insertMediaDescription(@Param("code") String code,
                                 @Param("mediaUrl") String mediaUrl,
                                 @Param("mediaType") String mediaType);
+
     @Select("SELECT * FROM decoded_data")
     List<DecodedData> getDecodedData();
 
