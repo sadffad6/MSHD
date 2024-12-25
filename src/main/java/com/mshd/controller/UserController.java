@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.mshd.utils.jwt.JwtToken;
 import com.mshd.utils.R;
+import java.util.List;
+
+import com.mshd.pojo.User;
 
 @RestController
 @RequestMapping("/user")
@@ -52,5 +55,17 @@ public class UserController {
             e.printStackTrace();
             return R.failure(e.getMessage());
         }
+    }
+
+    @GetMapping("/all")
+    public R all() {
+        List<User> userList = userService.getAllUsers();
+        return R.ok(userList);
+    }
+
+    @PostMapping("/change_name")
+    public R changeName(@RequestParam("id") String id, @RequestParam("name") String name) {
+        int yn = userService.updateUsername(id, name);
+        return R.ok(yn);
     }
 }

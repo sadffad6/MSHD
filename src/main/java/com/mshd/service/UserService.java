@@ -4,6 +4,8 @@ import com.mshd.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.mshd.mapper.UserMapper;
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -31,7 +33,16 @@ public class UserService {
         }
 
     }
+
     public String getPassword(String username) {
         return userMapper.getPassword(username);
+    }
+
+    public List<User> getAllUsers() {
+        return userMapper.findAllUsers();
+    }
+
+    public int updateUsername(String id, String username) {
+        return userMapper.updateUsername(id, username);
     }
 }
